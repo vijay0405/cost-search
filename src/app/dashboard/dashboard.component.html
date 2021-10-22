@@ -1,15 +1,37 @@
 <nb-card>
-    <nb-card-body>
-  
-      <nb-tabset>
-        <nb-tab tabTitle="Find Cost of Living" tabIcon="person-outline" responsive>
-          <p>List of <strong>users</strong>.</p>
-        </nb-tab>
-        <nb-tab tabTitle="Compare Cities" tabIcon="bell-outline" responsive>
-          <p>List of <strong>orders</strong>.</p>
-        </nb-tab>
+  <nb-card-body>
 
-      </nb-tabset>
-  
-    </nb-card-body>
-  </nb-card>
+    <nb-tabset>
+      
+      <nb-tab tabTitle="Find Cost of Living" tabIcon="search-outline" responsive>
+        <p><strong>Cost of Living</strong>.</p>
+        <form (submit)="onSearch(searchForm)" #searchForm="ngForm">
+          <input type="text" name="searchInput" nbInput placeholder="Type and Search City" ngModel #searchInput="ngModel" required>
+          <button style="margin: 8px;" nbButton status="primary" type="submit">Search<nb-icon icon="search"></nb-icon></button>
+        </form>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+        
+        <div *ngIf="cityData">
+          {{cityData['name']}}
+          {{cityData['currency']}}
+
+          <nb-card *ngFor="let item of cityData['itemsFilterd'] | keyvalue">
+            <nb-card-body>
+              <p><strong>{{item.key}}</strong></p>
+              <p *ngFor="let info of item.value">
+                {{info.item_name}} - {{cityData['currency']}} {{info.average_price | number: '1.0-0'}}
+              </p>
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+      </nb-tab>
+      <nb-tab tabTitle="Compare Cities" tabIcon="swap-outline" responsive>
+        <p><strong>Cost of Living Comparison</strong>.</p>
+
+      </nb-tab>
+
+    </nb-tabset>
+
+  </nb-card-body>
+</nb-card>

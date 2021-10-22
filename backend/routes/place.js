@@ -16,6 +16,20 @@ const getCityData = async (city) => {
 router.get('/city_prices', async (req, res, next) => {
     try {
         let data = await getCityData(req.query['city'])
+        let filtered = {}
+        data['prices'].forEach((item) => {
+            let products = item['item_name'].split(",");
+            item['itemType'] = products.pop();
+            item['item_name'] = products.join(",");
+
+            if (filtered[item['itemType']]) {
+                filtered[item['itemType']].push(item)
+            } else {
+                filtered[item['itemType']] = [item]
+            }
+
+        }) 
+        data['itemsFilterd'] = filtered
         res.status(200).json({data: data})
     } catch (error) {
         console.log(error)

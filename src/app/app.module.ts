@@ -18,9 +18,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/signUp/signUp.component';
 import { AuthInterceptor } from './auth/auth-interceptor'
 import { ErrorInterceptor } from './error-interceptor';
-import { NbCardModule, NbTabsetModule, NbThemeModule, NbLayoutModule, NbActionsModule, NbInputModule } from '@nebular/theme';
+import { NbCardModule, NbTabsetModule, NbThemeModule, NbLayoutModule, NbActionsModule, NbInputModule, NbFormFieldModule, NbIconModule, NbButtonModule } from '@nebular/theme';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -51,6 +52,10 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbEvaIconsModule,
     NbActionsModule,
     NbInputModule,
+    NbFormFieldModule,
+    NbIconModule,
+    NbButtonModule,
+    MatProgressBarModule,
     NbThemeModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule
