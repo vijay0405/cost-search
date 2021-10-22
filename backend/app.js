@@ -7,7 +7,7 @@ const placeRoutes = require("./routes/place");
 const app = express();
 
 
-mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/placeApp', { useNewUrlParser: true })
   .then(() => {
     console.log("Connected to database!");
   })

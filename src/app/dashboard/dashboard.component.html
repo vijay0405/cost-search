@@ -21,7 +21,7 @@
             </strong>
           </p>
 
-          <nb-card *ngFor="let item of cityData['itemsFilterd'] | keyvalue">
+          <nb-card *ngFor="let item of cityData['itemsFiltered'] | keyvalue">
             <nb-card-body>
               <p><strong>{{item.key}}</strong></p>
               <p *ngFor="let info of item.value">
@@ -51,18 +51,18 @@
             </strong>
           </p>
 
-          <nb-card *ngFor="let item of cityData2['itemsFilterd'] | keyvalue">
+          <nb-card *ngFor="let item of cityData2['itemsFiltered'] | keyvalue">
             <nb-card-body>
               <p><strong>{{item.key}}</strong></p>
               <p *ngFor="let info of item.value; index as i">
                 {{info.item_name}} - <strong>{{cityData2['currency']}} {{info.average_price | number: '1.0-0'}}</strong>
                 -VS-
-                <strong>{{cityData3['currency']}} {{cityData3['itemsFilterd'][item.key][i].average_price | number:
+                <strong>{{cityData3['currency']}} {{cityData3['itemsFiltered'][item.key][i].average_price | number:
                   '1.0-0'}}</strong>
               </p>
             </nb-card-body>
           </nb-card>
-          <!-- <nb-card *ngFor="let item of cityData3['itemsFilterd'] | keyvalue">
+          <!-- <nb-card *ngFor="let item of cityData3['itemsFiltered'] | keyvalue">
                 <nb-card-body>
                   <p><strong>{{item.key}}</strong></p>
                   <p *ngFor="let info of item.value">

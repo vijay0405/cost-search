@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
-const User = require('../models/user');
+const Place = require('../models/place');
 const checkAuth = require('../token.js');
 const api_key = require('../../keys.json').numbeo_api_key;
 const axios = require('axios');
@@ -30,7 +30,9 @@ const filterData = (data)=>{
 router.get('/city_prices', async (req, res, next) => {
     try {
         let data = await getCityData(req.query['city'])
-        data['itemsFilterd'] = await filterData(data)
+        data['itemsFiltered'] = await filterData(data)
+        await Place.create(data);
+
         res.status(200).json({data: data})
     } catch (error) {
         console.log(error)
@@ -41,11 +43,12 @@ router.get('/city_prices', async (req, res, next) => {
 router.get('/compare/city_prices', async (req, res, next) => {
     try {
         let data1 = await getCityData(req.query['city1'])
-        data1['itemsFilterd'] = await filterData(data1)
+        data1['itemsFiltered'] = await filterData(data1)
+        await Place.create(data1);
 
         let data2 = await getCityData(req.query['city2'])
-        data2['itemsFilterd'] = await filterData(data2)
-        
+        data2['itemsFiltered'] = await filterData(data2)
+        await Place.create(data2);
 
         res.status(200).json({city1: data1, city2: data2})
     } catch (error) {
