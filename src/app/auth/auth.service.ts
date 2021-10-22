@@ -65,7 +65,7 @@ export class AuthService {
           this.userId = response.userId;
           this.authStatusListener.next(true);
           this.saveAuthData(response.token, new Date((new Date()).getTime() + (expiresInDuration * 1000)), this.userId)
-          this.router.navigate(['/']);
+          this.router.navigate(['dashboard']);
         }
       }, error => {
         this.authStatusListener.next(false);

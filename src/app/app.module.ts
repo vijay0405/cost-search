@@ -18,6 +18,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/signUp/signUp.component';
 import { AuthInterceptor } from './auth/auth-interceptor'
 import { ErrorInterceptor } from './error-interceptor';
+import { NbThemeModule } from '@nebular/theme';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ErrorInterceptor } from './error-interceptor';
     HeaderComponent,
     LoginComponent,
     SignUpComponent,
-    ErrorComponent
+    ErrorComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { ErrorInterceptor } from './error-interceptor';
     MatProgressSpinnerModule,
     MatExpansionModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    NbThemeModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],
