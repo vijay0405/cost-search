@@ -2,24 +2,31 @@
   <nb-card-body>
 
     <nb-tabset>
-      
+
       <nb-tab tabTitle="Find Cost of Living" tabIcon="search-outline" responsive>
         <p><strong>Cost of Living</strong>.</p>
         <form (submit)="onSearch(searchForm)" #searchForm="ngForm">
-          <input type="text" name="searchInput" nbInput placeholder="Type and Search City" ngModel #searchInput="ngModel" required>
-          <button style="margin: 8px;" nbButton status="primary" type="submit">Search<nb-icon icon="search"></nb-icon></button>
+          <input style="margin: 8px;" type="text" name="searchInput" nbInput placeholder="Type and Search City" ngModel
+            #searchInput="ngModel" required>
+          <button style="margin: 8px;" nbButton status="primary" type="submit">Search<nb-icon icon="search"></nb-icon>
+          </button>
         </form>
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-        
+
         <div *ngIf="cityData">
-          {{cityData['name']}}
-          {{cityData['currency']}}
+          <p>
+            <strong>
+              {{cityData['name']}}
+              {{cityData['currency']}}
+            </strong>
+          </p>
 
           <nb-card *ngFor="let item of cityData['itemsFilterd'] | keyvalue">
             <nb-card-body>
               <p><strong>{{item.key}}</strong></p>
               <p *ngFor="let info of item.value">
-                {{info.item_name}} - {{cityData['currency']}} {{info.average_price | number: '1.0-0'}}
+                {{info.item_name}} - 
+                <strong>{{cityData['currency']}} {{info.average_price | number: '1.0-0'}}</strong>
               </p>
             </nb-card-body>
           </nb-card>
@@ -27,8 +34,43 @@
 
       </nb-tab>
       <nb-tab tabTitle="Compare Cities" tabIcon="swap-outline" responsive>
-        <p><strong>Cost of Living Comparison</strong>.</p>
+        <p><strong>Compare Cost of Living.</strong>.</p>
+        <form (submit)="onCompareSearch(searchCompareForm)" #searchCompareForm="ngForm">
+          <input style="margin: 8px;" type="text" name="searchInput2" nbInput placeholder="Type City1" ngModel
+            #searchInput2="ngModel" required>
+          <input style="margin: 8px;" type="text" name="searchInput3" nbInput placeholder="Type City2" ngModel
+            #searchInput3="ngModel" required>
+          <button style="margin: 8px;" nbButton status="primary" type="submit">Compare<nb-icon icon="swap-outline">
+            </nb-icon></button>
+        </form>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+        <div *ngIf="cityData2['name'] && cityData3['name']">
+          <p>
+            <strong>
+              {{cityData2['name']}} {{cityData2['currency']}} -VS- {{cityData3['name']}} {{cityData3['currency']}}
+            </strong>
+          </p>
 
+          <nb-card *ngFor="let item of cityData2['itemsFilterd'] | keyvalue">
+            <nb-card-body>
+              <p><strong>{{item.key}}</strong></p>
+              <p *ngFor="let info of item.value; index as i">
+                {{info.item_name}} - <strong>{{cityData2['currency']}} {{info.average_price | number: '1.0-0'}}</strong>
+                -VS-
+                <strong>{{cityData3['currency']}} {{cityData3['itemsFilterd'][item.key][i].average_price | number:
+                  '1.0-0'}}</strong>
+              </p>
+            </nb-card-body>
+          </nb-card>
+          <!-- <nb-card *ngFor="let item of cityData3['itemsFilterd'] | keyvalue">
+                <nb-card-body>
+                  <p><strong>{{item.key}}</strong></p>
+                  <p *ngFor="let info of item.value">
+                    {{info.item_name}} - {{cityData3['currency']}} {{info.average_price | number: '1.0-0'}}
+                  </p>
+                </nb-card-body>
+              </nb-card> -->
+        </div>
       </nb-tab>
 
     </nb-tabset>

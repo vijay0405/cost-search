@@ -12,24 +12,25 @@ const getCityData = async (city) => {
     return response.data
 }
 
+const filterData = (data)=>{
+    let filtered = {}
+    data['prices'].forEach((item) => {
+        let products = item['item_name'].split(",");
+        item['itemType'] = products.pop();
+        item['item_name'] = products.join(",");
+        if (filtered[item['itemType']]) {
+            filtered[item['itemType']].push(item)
+        } else {
+            filtered[item['itemType']] = [item]
+        }
+    }) 
+    return filtered
+}
 
 router.get('/city_prices', async (req, res, next) => {
     try {
         let data = await getCityData(req.query['city'])
-        let filtered = {}
-        data['prices'].forEach((item) => {
-            let products = item['item_name'].split(",");
-            item['itemType'] = products.pop();
-            item['item_name'] = products.join(",");
-
-            if (filtered[item['itemType']]) {
-                filtered[item['itemType']].push(item)
-            } else {
-                filtered[item['itemType']] = [item]
-            }
-
-        }) 
-        data['itemsFilterd'] = filtered
+        data['itemsFilterd'] = await filterData(data)
         res.status(200).json({data: data})
     } catch (error) {
         console.log(error)
@@ -40,7 +41,12 @@ router.get('/city_prices', async (req, res, next) => {
 router.get('/compare/city_prices', async (req, res, next) => {
     try {
         let data1 = await getCityData(req.query['city1'])
+        data1['itemsFilterd'] = await filterData(data1)
+
         let data2 = await getCityData(req.query['city2'])
+        data2['itemsFilterd'] = await filterData(data2)
+        
+
         res.status(200).json({city1: data1, city2: data2})
     } catch (error) {
         console.log(error)

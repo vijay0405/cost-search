@@ -16,6 +16,9 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   cityData = {}
+  cityData2 = {}
+  cityData3 = {}
+
   isLoading = false
 
   ngOnInit(): void {
@@ -34,10 +37,33 @@ export class DashboardComponent implements OnInit {
       })
   }
 
+  getComparisionData(city1, city2) {
+    this.isLoading = true
+    this.http.get(`http://localhost:3000/api/place/compare/city_prices?city1=${city1}&city2=${city2}`)
+      .subscribe(res => {
+        this.isLoading = false
+        console.log(res)
+        // this.cityData = res['data']
+        this.cityData2 = res['city1']
+        this.cityData3 = res['city2']
+      }, err => {
+        console.log(err)
+      })
+  }
+
   onSearch(form: NgForm) {
+    this.cityData = {}
     if (form.invalid) return
     console.log(form.value)
     this.getData(form.value.searchInput)
+  }
+
+  onCompareSearch(form: NgForm) {
+    this.cityData2 = {}
+    this.cityData3 = {}
+    if (form.invalid) return
+    console.log(form.value)
+    this.getComparisionData(form.value.searchInput2, form.value.searchInput3)
   }
 
 }
