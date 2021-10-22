@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user');
+const secret = require('../../keys.json').secret;
 
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -34,7 +35,7 @@ router.post('/login', (req, res, next) => {
     .then(result => {
       if (!result)
         return res.status(401).json({ message: "auth failed" });
-      const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id }, "dsfadfsfl2erkndf", { expiresIn: "1h" });
+      const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id }, secret, { expiresIn: "1h" });
       res.status(200).json({ message: "login success", token: token, expiresIn: 3600, userId: fetchedUser._id });
     })
     .catch(err => {

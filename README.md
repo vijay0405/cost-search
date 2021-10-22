@@ -1,6 +1,4 @@
-# Start-Angular (Mean stack project rather than just starter project)
-
-This starter project will help you in bulding applications faster without having to develop basic things like configuring authentication and managing tokens with backend support and database support along with frontend angular. The only thing is to start building components as per requirement and implementing the backend api's. The project already contains code for login and signup logic.
+# Cost Search (Find and compare cost living by city)
 
 # Install modules
  using npm install 
