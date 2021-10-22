@@ -1,11 +1,22 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <span> <a routerLink="/">Cost Search</a></span>
   <span class="spacer"></span>
 
   <ul>
-    <!-- <li *ngIf="userIsAuthenticated"><a mat-button routerLink="/create" routerLinkActive="mat-accent">Create</a></li> -->
     <li *ngIf="!userIsAuthenticated"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></li>
     <li *ngIf="!userIsAuthenticated"><a mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a></li>
     <li *ngIf="userIsAuthenticated" (click)="onLogout()"><button mat-button>Logout</button></li>
   </ul>
-</mat-toolbar>
+</mat-toolbar> -->
+
+
+<nb-layout-header subheader>
+  
+  <h4>Cost Search</h4>
+  <span class="spacer"></span>
+  <nb-actions>
+    <nb-action  *ngIf="!userIsAuthenticated"> <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a> </nb-action>
+    <nb-action  *ngIf="!userIsAuthenticated"> <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a> </nb-action>
+    <nb-action  *ngIf="userIsAuthenticated" (click)="onLogout()"> <button mat-button>Logout</button> </nb-action>
+  </nb-actions>
+</nb-layout-header>

@@ -1,5 +1,25 @@
-<app-header></app-header>
-<main>
-  <router-outlet></router-outlet>
+<nb-layout>
 
-</main>
+<!-- <nb-layout-header subheader>
+    Cost Search
+    <span class="header-spacer"></span>
+    <nb-actions>
+      <nb-action > Logout </nb-action>
+    </nb-actions>
+  </nb-layout-header> -->
+
+  <nb-layout-column>
+    <app-header></app-header>
+
+    <main>
+      <router-outlet></router-outlet>
+    
+    </main>
+    
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+  <!-- Insert footer here -->
+  </nb-layout-footer>
+
+</nb-layout>

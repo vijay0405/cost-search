@@ -18,8 +18,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/signUp/signUp.component';
 import { AuthInterceptor } from './auth/auth-interceptor'
 import { ErrorInterceptor } from './error-interceptor';
-import { NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbTabsetModule, NbThemeModule, NbLayoutModule, NbActionsModule, NbInputModule } from '@nebular/theme';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+
 
 
 @NgModule({
@@ -44,7 +46,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatExpansionModule,
     HttpClientModule,
     MatDialogModule,
-    NbThemeModule.forRoot()
+    NbTabsetModule,
+    NbCardModule,
+    NbEvaIconsModule,
+    NbActionsModule,
+    NbInputModule,
+    NbThemeModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],
