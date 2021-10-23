@@ -17,7 +17,7 @@ router.post('/signup', (req, res, next) => {
           res.status(201).json({ message: "user created", result: result });
         })
         .catch(error => {
-          res.status(500).json({ error: error });
+          res.status(500).json({ error: error, message: "Failed to create user." });
         })
     })
 });
@@ -33,13 +33,17 @@ router.post('/login', (req, res, next) => {
       return bcrypt.compare(req.body.password, user.password)
     })
     .then(result => {
-      if (!result)
-        return res.status(401).json({ message: "auth failed" });
-      const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id }, secret, { expiresIn: "1h" });
-      res.status(200).json({ message: "login success", token: token, expiresIn: 3600, userId: fetchedUser._id });
+      console.log(result, fetchedUser)
+      if (result && fetchedUser) {
+        const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id }, secret, { expiresIn: "1h" });
+        res.status(200).json({ message: "login success", token: token, expiresIn: 3600, userId: fetchedUser._id });
+      } else {
+        return res.status(401).json({ message: "authentication failed" });
+      }
     })
     .catch(err => {
-      return res.status(401).json({ message: "auth failed" });
+      console.log(err)
+      return res.status(401).json({ message: "authentication failed" });
     })
 });
 
