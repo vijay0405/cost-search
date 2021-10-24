@@ -3,11 +3,12 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const Place = require('../models/place');
 const checkAuth = require('../token.js');
-const api_key = require('../../keys.json').numbeo_api_key;
+const api_key = require('../keys.json').numbeo_api_key;
 const axios = require('axios');
 
 const getCityData = async (city) => {
-    const path = `https://www.numbeo.com/api/city_prices?api_key=${api_key}&query=`+city
+    const path = `https://www.numbeo.com/api/city_prices?api_key=${api_key}&query=${city}`;
+    console.log("path",path)
     const response = await axios.get(path);
     return response.data
 }

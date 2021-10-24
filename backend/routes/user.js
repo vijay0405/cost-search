@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user');
-const secret = require('../../keys.json').secret;
+const secret = require('../keys.json').secret;
 
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)

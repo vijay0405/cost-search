@@ -34,4 +34,7 @@ app.use((req, res, next) => {
 app.use("/api/user", userRoutes);
 app.use("/api/place", placeRoutes);
 
+app.listen(3000, function () {
+  console.log("App started at", 3000)
+});
 module.exports = app;
