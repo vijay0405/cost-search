@@ -28,7 +28,7 @@ const filterData = (data)=>{
     return filtered
 }
 
-router.get('/city_prices', async (req, res, next) => {
+router.get('/cityPrices', async (req, res, next) => {
     try {
         let data = await getCityData(req.query['city'])
         data['itemsFiltered'] = await filterData(data)
@@ -41,7 +41,7 @@ router.get('/city_prices', async (req, res, next) => {
     }
 });
 
-router.get('/compare/city_prices', async (req, res, next) => {
+router.get('/compare/cityPrices', async (req, res, next) => {
     try {
         let data1 = await getCityData(req.query['city1'])
         data1['itemsFiltered'] = await filterData(data1)

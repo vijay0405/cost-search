@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
   getData(city) {
     this.isLoading = true
-    this.http.get('http://localhost:3000/api/place/cityPrices?city='+city)
+    this.http.get('http://52.66.255.245:3000/api/place/cityPrices?city='+city)
       .subscribe(res => {
         this.isLoading = false
         console.log(res)
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
   getComparisionData(city1, city2) {
     this.isLoading = true
-    this.http.get(`http://localhost:3000/api/place/compare/cityPrices?city1=${city1}&city2=${city2}`)
+    this.http.get(`http://52.66.255.245:3000/api/place/compare/cityPrices?city1=${city1}&city2=${city2}`)
       .subscribe(res => {
         this.isLoading = false
         console.log(res)
